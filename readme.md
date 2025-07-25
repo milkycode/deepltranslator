@@ -7,13 +7,13 @@ Will translate all files inside a laravel project using the DeepL API and export
 Installation can be done through composer
 
 ``
-composer require alessiodh/deepltranslator
+composer require milkycode/deepltranslator
 ``
 
 Publishing the config file
 
 ``
-php artisan vendor:publish --provider="Alessiodh\Deepltranslator\DeeplTranslatorServiceProvider" 
+php artisan vendor:publish --provider="milkycode\Deepltranslator\DeeplTranslatorServiceProvider" 
 ``
 
 ## Usage
@@ -56,7 +56,7 @@ This will do exactly the same as translating all files but instead will only tak
 ```php
 namespace App\Http\Controllers;
 
-use Alessiodh\Deepltranslator\Traits\DeepltranslatorTrait;
+use milkycode\Deepltranslator\Traits\DeepltranslatorTrait;
 
 class MyTestController extends Controller
 {

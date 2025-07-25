@@ -1,8 +1,8 @@
 <?php
 
-namespace Alessiodh\Deepltranslator;
+namespace milkycode\Deepltranslator;
 
-use Alessiodh\Deepltranslator\Commands\DeeplTranslator;
+use milkycode\Deepltranslator\Commands\DeeplTranslator;
 use Illuminate\Support\ServiceProvider;
 
 class DeeplTranslatorServiceProvider extends ServiceProvider
@@ -29,7 +29,7 @@ class DeeplTranslatorServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/config/deepltranslator.php' => config_path('/deepltranslator.php')
-        ],'config');
+            __DIR__ . '/config/deepltranslator.php' => config_path('/deepltranslator.php')
+        ], 'config');
     }
 }

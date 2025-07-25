@@ -1,10 +1,11 @@
 <?php
 
-namespace Alessiodh\Deepltranslator\Traits;
+namespace milkycode\Deepltranslator\Traits;
 
 use GuzzleHttp\Client;
 
-trait DeepltranslatorTrait {
+trait DeepltranslatorTrait
+{
     private $possibleTranslationLanguages = [
         "BG",
         "CS",
@@ -36,12 +37,13 @@ trait DeepltranslatorTrait {
         "ZH",
     ];
 
-    function translateString($text, $from, $to){
-        if(!$this->checkSettings($from, $to)){
+    function translateString($text, $from, $to)
+    {
+        if (!$this->checkSettings($from, $to)) {
             return false;
         }
 
-        if(!is_array($to)){
+        if (!is_array($to)) {
             $to = [$to];
         }
 
@@ -58,7 +60,7 @@ trait DeepltranslatorTrait {
                 'formality' => config('deepltranslator.formality'),
                 'preserve_formatting' => config('deepltranslator.preserve_formatting'),
             ];
-            $body = http_build_query($params).'&text='.$text;
+            $body = http_build_query($params) . '&text=' . $text;
 
             $client = new Client();
             $response = $client->post($baseUrl, [
@@ -69,8 +71,8 @@ trait DeepltranslatorTrait {
             ]);
 
             $result = json_decode($response->getBody()->getContents());
-            if(isset($result->translations)){
-                if(isset($result->translations[0])){
+            if (isset($result->translations)) {
+                if (isset($result->translations[0])) {
                     $translated[$toLang] = $result->translations[0]->text;
                 }
             }
@@ -79,33 +81,34 @@ trait DeepltranslatorTrait {
         return $translated;
     }
 
-    private function checkSettings($from, $to){
-        if(!config('deepltranslator.deepl_url')){
+    private function checkSettings($from, $to)
+    {
+        if (!config('deepltranslator.deepl_url')) {
             return false;
         }
 
-        if(!config('deepltranslator.deepl_api_key')){
+        if (!config('deepltranslator.deepl_api_key')) {
             return false;
         }
 
-        if(!is_array($to)){
+        if (!is_array($to)) {
             $to = [$to];
         }
 
-        if(!in_array(strtoupper($from),$this->possibleTranslationLanguages)){
+        if (!in_array(strtoupper($from), $this->possibleTranslationLanguages)) {
             return false;
         }
 
-        if(count($to) !== count(array_unique($to))){
+        if (count($to) !== count(array_unique($to))) {
             return false;
         }
 
         foreach ($to as $toLang) {
-            if($from == $toLang){
+            if ($from == $toLang) {
                 return false;
             }
 
-            if(!in_array(strtoupper($toLang),$this->possibleTranslationLanguages)){
+            if (!in_array(strtoupper($toLang), $this->possibleTranslationLanguages)) {
                 return false;
             }
         }
