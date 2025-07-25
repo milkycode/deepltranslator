@@ -53,7 +53,7 @@ trait DeepltranslatorTrait
         foreach ($to as $toLang) {
             $params = [
                 'tag_handling' => 'xml',
-                'ignore_tags' => 'ignore,ignore-filename,ignore-index',
+                'ignore_tags' => config('deepltranslator.ignore_tags'),
                 'source_lang' => strtoupper($from),
                 'target_lang' => strtoupper($toLang),
                 'auth_key' => config('deepltranslator.deepl_api_key'),

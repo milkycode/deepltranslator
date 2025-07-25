@@ -22,5 +22,7 @@ return [
      * "1"
      * @see https://www.deepl.com/docs-api/translating-text/
      */
-    'preserve_formatting' => "0"
+    'preserve_formatting' => "0",
+
+    'ignore_tags' => "ignore,ignore-filename,ignore-index"
 ];

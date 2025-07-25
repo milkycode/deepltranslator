@@ -161,7 +161,7 @@ class DeeplTranslator extends Command
                 foreach ($allTranslations as $chunkedTranslations) {
                     $params = [
                         'tag_handling' => 'xml',
-                        'ignore_tags' => 'ignore,ignore-filename,ignore-index',
+                        'ignore_tags' => config('deepltranslator.ignore_tags'),
                         'source_lang' => strtoupper($this->argument('from')),
                         'target_lang' => strtoupper($this->argument('to')),
                         'auth_key' => config('deepltranslator.deepl_api_key'),
