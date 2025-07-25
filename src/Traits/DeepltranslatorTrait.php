@@ -53,6 +53,10 @@ trait DeepltranslatorTrait
         }
 
         $baseUrl = config('deepltranslator.deepl_url');
+        if (!config('deepltranslator.deepl_pro_api')) {
+            $baseUrl = config('deepltranslator.deepl_url_free');
+        }
+
         $translated = [];
 
         foreach ($to as $toLang) {

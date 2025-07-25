@@ -1,13 +1,16 @@
 <?php
 
 return [
-    /*
+    /**
      * API Key for DeepL.
      * This key can be obtained on https://www.deepl.com/
      */
     'deepl_api_key' => env('DEEPL_API_KEY', null),
 
-    'deepl_url' => env('DEEPL_API_URL', 'https://api-free.deepl.com/v2/translate'),
+    /**
+     * Should we use the DeepL Pro API? Default is free.
+     */
+    'deepl_pro_api' => env('DEEPL_PRO_API', false),
 
     /**
      * The formality parameter. One of: "default", "more", or "less"
@@ -24,5 +27,14 @@ return [
      */
     'preserve_formatting' => "0",
 
-    'ignore_tags' => "ignore,ignore-filename,ignore-index"
+    /**
+     * Ignore tags.
+     */
+    'ignore_tags' => "ignore,ignore-filename,ignore-index",
+
+    /**
+     * DeepL API URL. Change to pro URL, if you are going to use the pro plan, otherwise free.
+     */
+    'deepl_url' => env('DEEPL_API_URL', 'https://api.deepl.com/v2/translate'), // Endpoint for pro API
+    'deepl_url_free' => env('DEEPL_API_URL_FREE', 'https://api-free.deepl.com/v2/translate') // Endpoint for free API
 ];

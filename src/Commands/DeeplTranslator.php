@@ -63,6 +63,9 @@ class DeeplTranslator extends Command
         }
 
         $baseUrl = config('deepltranslator.deepl_url');
+        if (!config('deepltranslator.deepl_pro_api')) {
+            $baseUrl = config('deepltranslator.deepl_url_free');
+        }
 
         if (!config('deepltranslator.deepl_api_key')) {
             $this->error('API key is not set');
