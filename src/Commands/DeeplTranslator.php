@@ -40,6 +40,11 @@ class DeeplTranslator extends Command
         "SL",
         "SV",
         "ZH",
+        "TR",
+        "KO",
+        "ZH",
+        "ZH-HANS",
+        "ZH-HANT",
     ];
 
     protected $signature = 'deepl:translate {from} {to} {--filename=} {--json}';

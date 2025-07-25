@@ -35,6 +35,11 @@ trait DeepltranslatorTrait
         "SL",
         "SV",
         "ZH",
+        "TR",
+        "KO",
+        "ZH",
+        "ZH-HANS",
+        "ZH-HANT",
     ];
 
     function translateString($text, $from, $to)
