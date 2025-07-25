@@ -64,8 +64,8 @@ class DeeplTranslator extends Command
             return true;
         }
 
-        $fromPath = resource_path('lang/' . $this->argument('from'));
-        $toPath = resource_path('lang/' . $this->argument('to'));
+        $fromPath = lang_path($this->argument('from'));
+        $toPath = lang_path($this->argument('to'));
 
         // From language path does not exist
         if (!file_exists($fromPath)) {
@@ -272,8 +272,8 @@ class DeeplTranslator extends Command
 
         $resultArray = $this->handleTranslatedTexts($decoded->translations);
 
-        if (!is_dir(resource_path('lang/' . $this->argument('to')))) {
-            if (!mkdir($concurrentDirectory = resource_path('lang/' . $this->argument('to'))) && !is_dir($concurrentDirectory)) {
+        if (!is_dir(lang_path($this->argument('to')))) {
+            if (!mkdir($concurrentDirectory = lang_path($this->argument('to'))) && !is_dir($concurrentDirectory)) {
                 throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
             }
         }
@@ -287,7 +287,7 @@ class DeeplTranslator extends Command
                 $fileContents = '<?php return ' . var_export($newTranslations, true) . ';';
             }
 
-            file_put_contents(resource_path('lang/' . $this->argument('to') . '/' . $filename), $fileContents);
+            file_put_contents(lang_path($this->argument('to') . '/' . $filename), $fileContents);
         }
     }
 
