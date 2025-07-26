@@ -65,17 +65,18 @@ trait DeepltranslatorTrait
                 'ignore_tags' => config('deepltranslator.ignore_tags'),
                 'source_lang' => strtoupper($from),
                 'target_lang' => strtoupper($toLang),
-                'auth_key' => config('deepltranslator.deepl_api_key'),
                 'formality' => config('deepltranslator.formality'),
                 'preserve_formatting' => config('deepltranslator.preserve_formatting'),
+                'text' => [$text],
             ];
-            $body = http_build_query($params) . '&text=' . $text;
+            $body = json_encode($params);
 
             $client = new Client();
             $response = $client->post($baseUrl, [
                 'body' => $body,
                 'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Authorization' => 'DeepL-Auth-Key ' . config('deepltranslator.deepl_api_key'),
+                    'Content-Type' => 'application/json',
                 ]
             ]);
 

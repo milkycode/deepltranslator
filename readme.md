@@ -13,7 +13,19 @@ composer require milkycode/deepltranslator
 Publishing the config file
 
 ``
-php artisan vendor:publish --provider="milkycode\Deepltranslator\DeeplTranslatorServiceProvider" 
+php artisan vendor:publish --provider="milkycode\Deepltranslator\DeeplTranslatorServiceProvider" --force
+``
+
+Add API Key to .env file or in config/deepltranslator.php
+
+``
+DEEPL_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX
+``
+
+Add API mode (pro or free) to .env file or in config/deepltranslator.php
+
+``
+DEEPL_PRO_API=false|true
 ``
 
 ## Usage
@@ -36,6 +48,11 @@ The from language files will be retrieved inside `/lang/{from}/`
 ### Trait
 
 The trait can be used to translate a single string to multiple languages on-the-fly
+
+### Limitations
+- You can only have max 128kb per translate call including all parameters.
+- In the DeepL free plan you can only translate a maximum of 500k characters per month.
+- If you translate files, a maximum of 50 files per translate call, can be translated.
 
 ## Examples
 

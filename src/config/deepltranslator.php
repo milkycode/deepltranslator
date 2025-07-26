@@ -13,24 +13,29 @@ return [
     'deepl_pro_api' => env('DEEPL_PRO_API', false),
 
     /**
-     * The formality parameter. One of: "default", "more", or "less"
-     * @see https://www.deepl.com/docs-api/translating-text/
+     * The formality parameter. One of: "default", "more", "less", "prefer_more" or "prefer_less".
+     * @see https://developers.deepl.com/api-reference/translate#param-formality
      */
     'formality' => 'default',
 
     /**
      * Sets whether the translation engine should respect the original formatting,
      * even if it usually corrects some aspects. Possible values are:
-     * "0" (default)
-     * "1"
-     * @see https://www.deepl.com/docs-api/translating-text/
+     * false (default)
+     * true
+     * @see https://developers.deepl.com/api-reference/translate#param-preserve-formatting
      */
-    'preserve_formatting' => "0",
+    'preserve_formatting' => false,
 
     /**
      * Ignore tags.
+     * @see https://developers.deepl.com/api-reference/translate#param-ignore-tags
      */
-    'ignore_tags' => "ignore,ignore-filename,ignore-index",
+    'ignore_tags' => [
+        "ignore",
+        "ignore-filename",
+        "ignore-index",
+    ],
 
     /**
      * DeepL API URL. Change to pro URL, if you are going to use the pro plan, otherwise free.

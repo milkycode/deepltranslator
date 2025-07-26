@@ -172,24 +172,18 @@ class DeeplTranslator extends Command
                         'ignore_tags' => config('deepltranslator.ignore_tags'),
                         'source_lang' => strtoupper($this->argument('from')),
                         'target_lang' => strtoupper($this->argument('to')),
-                        'auth_key' => config('deepltranslator.deepl_api_key'),
                         'formality' => config('deepltranslator.formality'),
                         'preserve_formatting' => config('deepltranslator.preserve_formatting'),
+                        'text' => $this->addIgnoreToTextForDeepL($chunkedTranslations, $file['filename'])
                     ];
+                    $body = json_encode($params);
 
-                    $texts = $this->addIgnoreToTextForDeepL($chunkedTranslations, $file['filename']);
-
-                    $text = '';
-                    foreach ($texts as $item) {
-                        $text .= $item;
-                    }
-
-                    $body = http_build_query($params) . '&' . substr_replace($text, "", -1);
                     yield function () use ($client, $body, $baseUrl) {
                         return $client->postAsync($baseUrl, [
                             'body' => $body,
                             'headers' => [
-                                'Content-Type' => 'application/x-www-form-urlencoded',
+                                'Authorization' => 'DeepL-Auth-Key ' . config('deepltranslator.deepl_api_key'),
+                                'Content-Type' => 'application/json',
                             ]
                         ]);
                     };
@@ -224,14 +218,14 @@ class DeeplTranslator extends Command
                 }
             } else {
                 if (count($indexes) > 0) {
-                    $t = 'text=<ignore-filename>' . $filename . '</ignore-filename>';
+                    $t = '<ignore-filename>' . $filename . '</ignore-filename>';
                     foreach ($indexes as $indexesToAdd) {
                         $t .= '<ignore-index>' . $indexesToAdd . '</ignore-index>';
                     }
-                    $t .= $chunkedTranslation . '&';
+                    $t .= $chunkedTranslation;
                     $texts[] = $t;
                 } else {
-                    $texts[] = 'text=<ignore-filename>' . $filename . '</ignore-filename><ignore-index>' . $index . '</ignore-index>' . $chunkedTranslation . '&';
+                    $texts[] = '<ignore-filename>' . $filename . '</ignore-filename><ignore-index>' . $index . '</ignore-index>' . $chunkedTranslation;
                 }
             }
         }
